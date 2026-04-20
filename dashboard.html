@@ -1,0 +1,112 @@
+{% extends 'admin/base_admin.html' %}
+{% block title %}Admin Dashboard{% endblock %}
+{% block admin_content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <div>
+    <h2 style="font-family:'Cinzel',serif;color:var(--navy);margin:0;">Admin Dashboard</h2>
+    <p style="color:#888;margin:0;font-size:0.9rem;">Samaj portal ka poora overview</p>
+  </div>
+  <div style="font-size:0.85rem;color:#888;"><i class="bi bi-clock me-1"></i>Welcome, {{ current_user.name }}</div>
+</div>
+
+<!-- Stats Cards -->
+<div class="row g-3 mb-4">
+  {% for icon, num, label, color, bg in [
+    ('people-fill', stats.total_members, 'Total Members', '#1A3A6B', '#EEF2FA'),
+    ('hourglass-split', stats.pending, 'Pending Approval', '#C8922A', '#FFF8E1'),
+    ('check-circle-fill', stats.active, 'Active Members', '#28A745', '#D1FAE5'),
+    ('calendar-event', stats.events, 'Total Events', '#2E5FAE', '#EEF2FA'),
+    ('heart-fill', stats.matrimonial_pending, 'Matrimonial Pending', '#C0392B', '#FEE2E2'),
+    ('envelope-fill', stats.messages, 'Total Messages', '#6F42C1', '#F3E8FF'),
+  ] %}
+  <div class="col-md-4 col-lg-2">
+    <div style="background:white;border-radius:12px;padding:20px;text-align:center;box-shadow:0 2px 10px rgba(0,0,0,0.07);border-top:3px solid {{ color }};">
+      <i class="bi bi-{{ icon }}" style="font-size:1.6rem;color:{{ color }};"></i>
+      <div style="font-size:1.8rem;font-weight:700;color:{{ color }};line-height:1.2;margin-top:6px;">{{ num }}</div>
+      <div style="font-size:0.75rem;color:#777;margin-top:4px;">{{ label }}</div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+
+<div class="row g-4">
+  <!-- Pending Members -->
+  <div class="col-lg-7">
+    <div class="card h-100">
+      <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 style="font-family:'Cinzel',serif;color:var(--navy);margin:0;"><i class="bi bi-hourglass-split me-2 text-gold"></i>Pending Approvals</h5>
+          <a href="{{ url_for('admin_members', status='pending') }}" style="font-size:0.85rem;color:var(--gold);">Sabhi Dekhein</a>
+        </div>
+        {% if pending_users %}
+        <div class="table-responsive">
+          <table class="table table-sm align-middle" style="font-size:0.88rem;">
+            <thead style="background:var(--light);">
+              <tr><th>Naam</th><th>Mobile</th><th>Registered</th><th>Action</th></tr>
+            </thead>
+            <tbody>
+              {% for user in pending_users[:5] %}
+              <tr>
+                <td><strong>{{ user.name }}</strong><br><small class="text-muted">{{ user.email }}</small></td>
+                <td>{{ user.mobile }}</td>
+                <td style="white-space:nowrap;">{{ user.created_at.strftime('%d %b %Y') }}</td>
+                <td>
+                  <a href="{{ url_for('approve_member', user_id=user.id) }}" class="btn btn-sm me-1" style="background:#d1fae5;color:#065f46;border:none;font-size:0.78rem;"><i class="bi bi-check-lg"></i> Approve</a>
+                  <a href="{{ url_for('reject_member', user_id=user.id) }}" class="btn btn-sm" style="background:#fee2e2;color:#991b1b;border:none;font-size:0.78rem;"><i class="bi bi-x-lg"></i> Reject</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+        {% else %}
+        <div class="text-center py-4" style="color:#aaa;">
+          <i class="bi bi-check-all" style="font-size:2rem;"></i>
+          <p class="mt-2" style="font-size:0.9rem;">Koi pending approval nahi hai!</p>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Recent Messages -->
+  <div class="col-lg-5">
+    <div class="card h-100">
+      <div class="card-body p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h5 style="font-family:'Cinzel',serif;color:var(--navy);margin:0;"><i class="bi bi-envelope me-2 text-gold"></i>Recent Messages</h5>
+          <a href="{{ url_for('admin_messages') }}" style="font-size:0.85rem;color:var(--gold);">Sabhi</a>
+        </div>
+        {% for fb in recent_feedback %}
+        <div style="border-left:3px solid var(--gold);padding:10px 14px;margin-bottom:12px;background:#FAFAFA;border-radius:0 8px 8px 0;">
+          <div style="font-weight:700;font-size:0.88rem;color:var(--navy);">{{ fb.name }}</div>
+          <div style="font-size:0.8rem;color:#888;margin-bottom:4px;">{{ fb.email }} | {{ fb.created_at.strftime('%d %b') }}</div>
+          <div style="font-size:0.85rem;color:#555;">{{ (fb.subject or '')[:50] }}{% if fb.subject and fb.subject|length > 50 %}...{% endif %}</div>
+        </div>
+        {% else %}
+        <div class="text-center py-4" style="color:#aaa;font-size:0.9rem;">Koi message nahi hai.</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Quick Actions -->
+<div class="row g-3 mt-2">
+  <div class="col-12">
+    <div class="card">
+      <div class="card-body p-4">
+        <h5 style="font-family:'Cinzel',serif;color:var(--navy);margin-bottom:16px;"><i class="bi bi-lightning-fill me-2 text-gold"></i>Quick Actions</h5>
+        <div class="d-flex gap-3 flex-wrap">
+          <a href="{{ url_for('admin_members', status='pending') }}" class="btn btn-outline-warning btn-sm"><i class="bi bi-person-check me-1"></i>Approve Members</a>
+          <a href="{{ url_for('admin_events') }}" class="btn btn-outline-primary btn-sm"><i class="bi bi-plus-circle me-1"></i>New Event</a>
+          <a href="{{ url_for('admin_gallery') }}" class="btn btn-outline-info btn-sm"><i class="bi bi-image me-1"></i>Gallery Upload</a>
+          <a href="{{ url_for('admin_matrimonial') }}" class="btn btn-outline-danger btn-sm"><i class="bi bi-heart me-1"></i>Matrimonial Review</a>
+          <a href="{{ url_for('admin_achievements') }}" class="btn btn-outline-success btn-sm"><i class="bi bi-trophy me-1"></i>Add Achievement</a>
+          <a href="{{ url_for('admin_messages') }}" class="btn btn-outline-secondary btn-sm"><i class="bi bi-envelope me-1"></i>View Messages</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Admin Sidebar -->
+<div class="admin-sidebar">
+  <div style="padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:8px;">
+    <div style="font-size:0.75rem;color:#5566aa;letter-spacing:1px;text-transform:uppercase;font-weight:700;">Admin Panel</div>
+    <div style="color:#E5A93C;font-size:0.85rem;margin-top:2px;">{{ current_user.name }}</div>
+  </div>
+  {% for icon, label, endpoint in [
+    ('speedometer2','Dashboard','admin_dashboard'),
+    ('people','Members','admin_members'),
+    ('calendar-event','Events','admin_events'),
+    ('heart','Matrimonial','admin_matrimonial'),
+    ('images','Gallery','admin_gallery'),
+    ('trophy','Achievements','admin_achievements'),
+    ('droplet','Blood Donors','admin_blood'),
+    ('envelope','Messages','admin_messages'),
+  ] %}
+  <a href="{{ url_for(endpoint) }}" class="sidebar-link {{ 'active' if request.endpoint==endpoint }}">
+    <i class="bi bi-{{ icon }}"></i> {{ label }}
+  </a>
+  {% endfor %}
+  <hr style="border-color:rgba(255,255,255,0.1);margin:12px 20px;">
+  <a href="{{ url_for('home') }}" class="sidebar-link"><i class="bi bi-house"></i> View Site</a>
+  <a href="{{ url_for('logout') }}" class="sidebar-link"><i class="bi bi-box-arrow-right"></i> Logout</a>
+</div>
+
+<!-- Admin Content -->
+<div class="admin-content">
+  {% block admin_content %}{% endblock %}
+</div>
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div style="min-height:85vh;background:linear-gradient(135deg,#06060A,#0F0F18,#13131A);display:flex;align-items:center;padding:60px 0;">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-5">
+        <div style="background:#13131A;border:1px solid rgba(212,168,67,0.2);border-radius:20px;padding:40px;box-shadow:0 20px 60px rgba(0,0,0,0.6);">
+          <div class="text-center mb-4">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" style="height:80px;width:auto;object-fit:contain;margin-bottom:16px;filter:drop-shadow(0 2px 8px rgba(212,168,67,0.3));">
+            <h3 style="font-family:'Cinzel',serif;color:#F0C060;">Samaj Portal Login</h3>
+            <p style="color:#7A7A9A;font-size:0.9rem;">Apne account mein login karein</p>
+          </div>
+          <form method="POST">
+            <div class="mb-3">
+              <label class="form-label" style="font-weight:600;">Email Address</label>
+              <input type="email" name="email" class="form-control form-control-lg" placeholder="your@email.com" required>
+            </div>
+            <div class="mb-4">
+              <label class="form-label" style="font-weight:600;">Password</label>
+              <input type="password" name="password" class="form-control form-control-lg" placeholder="••••••••" required>
+            </div>
+            <button type="submit" class="btn btn-gold w-100 btn-lg" style="border-radius:10px;">
+              <i class="bi bi-box-arrow-in-right me-2"></i>Login Karein
+            </button>
+          </form>
+          <div class="text-center mt-4" style="color:#7A7A9A;font-size:0.9rem;">
+            Account nahi hai? <a href="{{ url_for('register') }}" style="color:#D4A843;font-weight:700;">Register Karein</a>
+          </div>
+          <hr>
+          <div style="background:#0D0D14;border:1px solid rgba(212,168,67,0.1);border-radius:10px;padding:14px;font-size:0.82rem;color:#7A7A9A;">
+            <strong style="color:#D4A843;">Demo Login:</strong><br>
+            Admin: admin@lodhisamaj.in / admin123<br>
+            Member: member1@test.com / test123
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

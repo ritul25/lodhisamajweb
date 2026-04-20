@@ -1,0 +1,62 @@
+{% extends 'admin/base_admin.html' %}
+{% block title %}Manage Achievements{% endblock %}
+{% block admin_content %}
+<h2 style="font-family:'Cinzel',serif;color:var(--navy);margin-bottom:24px;"><i class="bi bi-trophy me-2 text-gold"></i>Achievements Management</h2>
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-body p-4">
+        <h5 style="font-family:'Cinzel',serif;color:var(--navy);margin-bottom:20px;">Nayi Achievement Add Karein</h5>
+        <form method="POST">
+          <div class="mb-3">
+            <label class="form-label fw-bold" style="font-size:0.88rem;">Title *</label>
+            <input type="text" name="title" class="form-control" required placeholder="Achievement ka naam">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold" style="font-size:0.88rem;">Category</label>
+            <select name="category" class="form-select">
+              {% for cat in ['Education','Sports','Social Service','Business','Cultural','Other'] %}
+              <option>{{ cat }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold" style="font-size:0.88rem;">Year</label>
+            <input type="text" name="year" class="form-control" placeholder="e.g. 2026">
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold" style="font-size:0.88rem;">Description</label>
+            <textarea name="description" class="form-control" rows="3" placeholder="Thoda vivaran..."></textarea>
+          </div>
+          <button type="submit" class="btn btn-gold w-100"><i class="bi bi-plus-lg me-2"></i>Achievement Add</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-body p-0">
+        <table class="table align-middle mb-0" style="font-size:0.88rem;">
+          <thead style="background:var(--navy);color:white;">
+            <tr><th style="padding:14px 16px;">Title</th><th>Category</th><th>Year</th></tr>
+          </thead>
+          <tbody>
+            {% for ach in achievements %}
+            <tr style="border-bottom:1px solid #f0f0f0;">
+              <td style="padding:12px 16px;">
+                <div style="font-weight:700;color:var(--navy);">{{ ach.title }}</div>
+                <div style="font-size:0.78rem;color:#888;">{{ (ach.description or '')[:60] }}{% if ach.description and ach.description|length > 60 %}...{% endif %}</div>
+              </td>
+              <td><span style="background:var(--light);color:var(--navy);padding:3px 10px;border-radius:20px;font-size:0.78rem;">{{ ach.category or '—' }}</span></td>
+              <td style="color:#666;">{{ ach.year or '—' }}</td>
+            </tr>
+            {% else %}
+            <tr><td colspan="3" class="text-center py-5" style="color:#aaa;">Koi achievement nahi hai.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

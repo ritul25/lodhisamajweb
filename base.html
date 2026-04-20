@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Lodhi Rajpoot Samaj{% endblock %} | Lodhi Rajpoot Samaj</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Tiro+Devanagari+Hindi&family=Cinzel:wght@400;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-main:   #0A0A0F;
+      --bg-card:   #13131A;
+      --bg-card2:  #1A1A25;
+      --bg-card3:  #22222F;
+      --navy:      #13131A;
+      --gold:      #D4A843;
+      --gold2:     #F0C060;
+      --gold3:     #FFD980;
+      --gold-dim:  #8A6820;
+      --dark:      #06060A;
+      --light:     #1E1E2E;
+      --border:    rgba(212,168,67,0.18);
+      --border2:   rgba(212,168,67,0.35);
+      --text-main: #E8E0D0;
+      --text-mute: #7A7A9A;
+      --text-soft: #B0A890;
+      --red:       #C0392B;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg-main);
+      color: var(--text-main);
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--dark); }
+    ::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 3px; }
+
+    /* ── TOP BAR ── */
+    .top-bar {
+      background: var(--dark);
+      color: var(--text-mute);
+      font-size: 0.78rem;
+      padding: 6px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .top-bar a { color: var(--text-mute); text-decoration: none; }
+    .top-bar a:hover { color: var(--gold2); }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      background: rgba(6,6,10,0.98) !important;
+      padding: 0;
+      box-shadow: 0 2px 40px rgba(0,0,0,0.8), 0 1px 0 rgba(212,168,67,0.15);
+      border-bottom: 1px solid rgba(212,168,67,0.2);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    .navbar::after {
+      content:'';
+      position:absolute;
+      bottom:0; left:0; right:0;
+      height:2px;
+      background: linear-gradient(90deg, transparent 0%, rgba(212,168,67,0.6) 30%, rgba(240,192,96,0.9) 50%, rgba(212,168,67,0.6) 70%, transparent 100%);
+    }
+    .navbar { position: relative; }
+    .navbar-brand {
+      display: flex; align-items: center; gap: 14px;
+      padding: 8px 16px;
+      text-decoration: none;
+    }
+    .brand-text { line-height: 1.15; }
+    .brand-text .en {
+      font-family: 'Cinzel', serif; font-size: 1.05rem;
+      color: var(--gold2); letter-spacing: 1px;
+      text-shadow: 0 0 20px rgba(212,168,67,0.4);
+    }
+    .brand-text .hi {
+      font-family: 'Tiro Devanagari Hindi', serif;
+      font-size: 0.82rem; color: var(--text-mute);
+    }
+    .brand-tagline {
+      font-size: 0.68rem; color: var(--gold-dim);
+      letter-spacing: 2px; text-transform: uppercase;
+      margin-top: 1px;
+    }
+
+    .nav-link {
+      color: #C8C0B0 !important;
+      font-weight: 600;
+      font-size: 0.86rem;
+      padding: 20px 14px !important;
+      letter-spacing: 0.5px;
+      transition: all 0.25s;
+      position: relative;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%; right: 50%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), var(--gold2));
+      transition: left 0.25s, right 0.25s;
+      border-radius: 2px;
+    }
+    .nav-link:hover::after, .nav-link.active::after {
+      left: 10%; right: 10%;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--gold2) !important;
+      text-shadow: 0 0 12px rgba(212,168,67,0.3);
+    }
+    .dropdown-menu {
+      background: #0D0D14;
+      border: 1px solid rgba(212,168,67,0.25);
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.7);
+      margin-top: 0 !important;
+      padding: 8px 0;
+    }
+    .dropdown-item {
+      color: #B0A890; font-size: 0.87rem; padding: 10px 20px;
+      transition: all 0.2s; letter-spacing: 0.3px;
+    }
+    .dropdown-item:hover {
+      background: rgba(212,168,67,0.08);
+      color: var(--gold2);
+      padding-left: 26px;
+    }
+    .dropdown-item i { color: var(--gold-dim); }
+    .dropdown-item:hover i { color: var(--gold2); }
+    .navbar-toggler { border-color: var(--border2); padding: 6px 10px; }
+    .navbar-toggler-icon { background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28212%2C168%2C67%2C0.9%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e"); }
+    .btn-join {
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      color: #06060A !important;
+      font-weight: 700;
+      font-size: 0.78rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 8px 18px !important;
+      border-radius: 6px;
+      border: none;
+      box-shadow: 0 4px 15px rgba(212,168,67,0.3);
+      transition: all 0.2s;
+    }
+    .btn-join:hover {
+      box-shadow: 0 6px 20px rgba(212,168,67,0.5);
+      transform: translateY(-1px);
+    }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, #0D0D16 0%, #13131A 60%, #0A0A0F 100%);
+      color: white;
+      padding: 60px 0 50px;
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: repeating-linear-gradient(45deg, transparent, transparent 50px, rgba(212,168,67,0.02) 50px, rgba(212,168,67,0.02) 100px);
+    }
+    .page-hero::after {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 300px; height: 300px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,168,67,0.08), transparent 70%);
+    }
+    .page-hero h1 { font-family: 'Cinzel', serif; font-size: 2.2rem; color: var(--gold2); position: relative; }
+    .page-hero p { color: var(--text-mute); position: relative; }
+
+    /* ── CARDS ── */
+    .card {
+      border: 1px solid var(--border) !important;
+      border-radius: 14px;
+      background: var(--bg-card) !important;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      color: var(--text-main);
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      border-color: var(--border2) !important;
+    }
+    .card-body { color: var(--text-main); }
+
+    /* ── BUTTONS ── */
+    .btn-primary { background: var(--bg-card3); border-color: var(--border2); color: var(--gold2); }
+    .btn-primary:hover { background: var(--gold-dim); border-color: var(--gold); color: white; }
+    .btn-gold {
+      background: linear-gradient(135deg, var(--gold), var(--gold2));
+      border: none; color: #0A0A0F; font-weight: 700;
+      box-shadow: 0 4px 15px rgba(212,168,67,0.3);
+      transition: all 0.2s;
+    }
+    .btn-gold:hover {
+      background: linear-gradient(135deg, var(--gold2), var(--gold3));
+      color: #0A0A0F;
+      box-shadow: 0 6px 20px rgba(212,168,67,0.45);
+      transform: translateY(-1px);
+    }
+    .btn-outline-gold {
+      border: 1.5px solid var(--gold);
+      color: var(--gold2); background: transparent; font-weight: 600;
+    }
+    .btn-outline-gold:hover { background: var(--gold); color: #0A0A0F; }
+    .btn-outline-light { border-color: rgba(255,255,255,0.2) !important; color: rgba(255,255,255,0.8) !important; }
+    .btn-outline-light:hover { background: rgba(255,255,255,0.08) !important; }
+    .btn-outline-secondary { border-color: var(--border2) !important; color: var(--text-soft) !important; }
+    .btn-outline-secondary:hover { background: var(--bg-card3) !important; color: var(--gold2) !important; }
+    .btn-outline-warning { border-color: #D4A843 !important; color: #D4A843 !important; }
+    .btn-outline-warning:hover { background: rgba(212,168,67,0.15) !important; }
+    .btn-outline-primary { border-color: #5577CC !important; color: #7799EE !important; }
+    .btn-outline-primary:hover { background: rgba(85,119,204,0.15) !important; }
+    .btn-outline-info { border-color: #2299BB !important; color: #44BBDD !important; }
+    .btn-outline-info:hover { background: rgba(34,153,187,0.15) !important; }
+    .btn-outline-success { border-color: #229944 !important; color: #44BB66 !important; }
+    .btn-outline-success:hover { background: rgba(34,153,68,0.15) !important; }
+    .btn-outline-danger { border-color: #CC3333 !important; color: #EE5555 !important; }
+    .btn-outline-danger:hover { background: rgba(204,51,51,0.15) !important; }
+
+    /* ── FORMS ── */
+    .form-control, .form-select {
+      background: var(--bg-card2) !important;
+      border: 1px solid var(--border) !important;
+      color: var(--text-main) !important;
+      border-radius: 8px;
+    }
+    .form-control:focus, .form-select:focus {
+      background: var(--bg-card3) !important;
+      border-color: var(--gold-dim) !important;
+      box-shadow: 0 0 0 3px rgba(212,168,67,0.12) !important;
+      color: var(--text-main) !important;
+    }
+    .form-control::placeholder { color: var(--text-mute) !important; }
+    .form-label { color: var(--text-soft) !important; }
+    .form-check-input { background-color: var(--bg-card2); border-color: var(--border2); }
+    .form-check-input:checked { background-color: var(--gold); border-color: var(--gold); }
+    .form-check-label { color: var(--text-soft) !important; }
+
+    /* ── TABLES ── */
+    .table { color: var(--text-main) !important; }
+    .table td, .table th { border-color: var(--border) !important; color: var(--text-main) !important; }
+    .table-responsive { border-radius: 0 0 12px 12px; overflow: hidden; }
+
+    /* ── SECTION TITLE ── */
+    .section-title { font-family: 'Cinzel', serif; color: var(--text-main); font-size: 1.8rem; }
+    .section-title span { color: var(--gold2); }
+    .section-divider { width: 60px; height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold2)); border-radius: 2px; margin: 8px 0 24px; }
+
+    /* ── STAT BOX ── */
+    .stat-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 20px; text-align: center;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      border-top: 3px solid var(--gold);
+    }
+    .stat-box .number { font-size: 2.5rem; font-weight: 700; color: var(--gold2); line-height: 1; }
+    .stat-box .label  { color: var(--text-mute); font-size: 0.85rem; margin-top: 4px; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--dark);
+      color: var(--text-mute);
+      padding: 50px 0 20px;
+      border-top: 1px solid var(--border);
+    }
+    footer h5 { color: var(--gold2); font-family: 'Cinzel', serif; margin-bottom: 16px; font-size: 1rem; }
+    footer a { color: var(--text-mute); text-decoration: none; display: block; margin-bottom: 6px; font-size: 0.9rem; }
+    footer a:hover { color: var(--gold2); }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.06); padding-top: 16px; margin-top: 32px; font-size: 0.82rem; color: var(--text-mute); }
+
+    /* ── ALERTS / FLASH ── */
+    .flash-container { position: fixed; top: 80px; right: 20px; z-index: 9999; width: 340px; }
+    .alert { border-radius: 10px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); border: 1px solid var(--border); }
+    .alert-success { background: #0D2318 !important; color: #5DE8A0 !important; border-color: #1A4D2E !important; }
+    .alert-danger  { background: #230D0D !important; color: #E87070 !important; border-color: #4D1A1A !important; }
+    .alert-warning { background: #231A0D !important; color: #E8C050 !important; border-color: #4D3A1A !important; }
+    .btn-close { filter: invert(1) opacity(0.5); }
+
+    /* ── ADMIN SIDEBAR ── */
+    .admin-sidebar {
+      background: var(--dark);
+      min-height: 100vh;
+      width: 240px;
+      position: fixed;
+      top: 0; left: 0;
+      padding-top: 70px;
+      z-index: 100;
+      border-right: 1px solid var(--border);
+      box-shadow: 3px 0 20px rgba(0,0,0,0.5);
+    }
+    .sidebar-link {
+      display: flex; align-items: center; gap: 10px;
+      color: var(--text-mute); padding: 12px 20px;
+      font-size: 0.9rem; text-decoration: none;
+      transition: all 0.2s;
+      border-left: 3px solid transparent;
+    }
+    .sidebar-link:hover, .sidebar-link.active {
+      color: var(--gold2);
+      background: rgba(212,168,67,0.08);
+      border-left-color: var(--gold);
+    }
+    .admin-content { margin-left: 240px; padding: 90px 30px 30px; background: var(--bg-main); min-height: 100vh; }
+
+    /* ── MEMBER AVATAR ── */
+    .member-avatar {
+      width: 180px; height: 180px;
+      background: linear-gradient(135deg, var(--bg-card3), var(--bg-card2));
+      border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cinzel', serif;
+      font-size: 3rem; color: var(--gold2);
+      margin: 0 auto;
+    }
+
+    /* ── MISC ── */
+    .text-navy { color: var(--gold2) !important; }
+    .text-gold  { color: var(--gold2) !important; }
+    .bg-navy { background: var(--bg-card) !important; }
+    .bg-gold  { background: var(--gold) !important; }
+    .rounded-lg { border-radius: 12px !important; }
+    .text-muted { color: var(--text-mute) !important; }
+    h1,h2,h3,h4,h5,h6 { color: var(--text-main); }
+    hr { border-color: var(--border) !important; opacity: 1; }
+    .pagination .page-link { background: var(--bg-card); border-color: var(--border); color: var(--gold2); }
+    .pagination .page-item.active .page-link { background: var(--gold); border-color: var(--gold); color: #0A0A0F; }
+
+    @media(max-width:768px) {
+      .admin-sidebar { display: none; }
+      .admin-content { margin-left: 0; padding: 80px 15px 20px; }
+      .page-hero h1 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Top Bar -->
+<div class="top-bar d-none d-md-block">
+  <div class="container d-flex justify-content-between">
+    <div>
+      <i class="bi bi-telephone me-1"></i> +91 98765 43210 &nbsp;|&nbsp;
+      <i class="bi bi-envelope me-1"></i> info@lodhisamaj.in
+    </div>
+    <div>
+      <a href="#"><i class="bi bi-facebook me-2"></i></a>
+      <a href="#"><i class="bi bi-whatsapp me-2"></i></a>
+      <a href="#"><i class="bi bi-youtube"></i></a>
+    </div>
+  </div>
+</div>
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="{{ url_for('home') }}">
+      <img src="{{ url_for('static', filename='images/logo.png') }}"
+           alt="Lodhi Rajpoot Samaj Logo"
+           style="height:52px;width:auto;object-fit:contain;filter:drop-shadow(0 2px 10px rgba(212,168,67,0.4));">
+      <div class="brand-text">
+        <div class="en">Lodhi Rajpoot Samaj</div>
+        <div class="hi">लोधी राजपूत समाज</div>
+        <div class="brand-tagline">एकता | गौरव | प्रगति</div>
+      </div>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item"><a class="nav-link {% if request.endpoint=='home' %}active{% endif %}" href="{{ url_for('home') }}"><i class="bi bi-house-fill me-1"></i>Home</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.endpoint=='directory' %}active{% endif %}" href="{{ url_for('directory') }}"><i class="bi bi-people-fill me-1"></i>Directory</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.endpoint=='events' %}active{% endif %}" href="{{ url_for('events') }}"><i class="bi bi-calendar-event-fill me-1"></i>Events</a></li>
+        <li class="nav-item"><a class="nav-link {% if request.endpoint=='achievements' %}active{% endif %}" href="{{ url_for('achievements') }}"><i class="bi bi-trophy-fill me-1"></i>Achievements</a></li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown"><i class="bi bi-grid-fill me-1"></i>More</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{{ url_for('matrimonial') }}"><i class="bi bi-heart-fill me-2"></i>Matrimonial</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('blood_donors') }}"><i class="bi bi-droplet-fill me-2"></i>Blood Donors</a></li>
+            <li><a class="dropdown-item" href="{{ url_for('gallery') }}"><i class="bi bi-images me-2"></i>Gallery</a></li>
+            <li><hr class="dropdown-divider" style="border-color:rgba(212,168,67,0.15);margin:4px 0;"></li>
+            <li><a class="dropdown-item" href="{{ url_for('contact') }}"><i class="bi bi-envelope-fill me-2"></i>Contact</a></li>
+          </ul>
+        </li>
+        {% if current_user.is_authenticated %}
+          {% if current_user.role in ['admin','superadmin'] %}
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('admin_dashboard') }}"><i class="bi bi-speedometer2 me-1"></i>Admin</a></li>
+          {% else %}
+            <li class="nav-item"><a class="nav-link" href="{{ url_for('dashboard') }}"><i class="bi bi-person-circle me-1"></i>{{ current_user.name.split()[0] }}</a></li>
+          {% endif %}
+          <li class="nav-item ms-1"><a class="nav-link" href="{{ url_for('logout') }}" style="color:#E87070 !important;"><i class="bi bi-box-arrow-right me-1"></i>Logout</a></li>
+        {% else %}
+          <li class="nav-item"><a class="nav-link" href="{{ url_for('login') }}"><i class="bi bi-box-arrow-in-right me-1"></i>Login</a></li>
+          <li class="nav-item ms-2 my-auto"><a class="btn-join" href="{{ url_for('register') }}"><i class="bi bi-person-plus me-1"></i>Join Now</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Flash Messages -->
+<div class="flash-container">
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% for cat, msg in messages %}
+      <div class="alert alert-{{ 'danger' if cat=='danger' else 'success' if cat=='success' else 'warning' }} alert-dismissible fade show" role="alert">
+        {{ msg }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+      </div>
+    {% endfor %}
+  {% endwith %}
+</div>
+
+<!-- Content -->
+{% block content %}{% endblock %}
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-4">
+        <h5>Lodhi Rajpoot Samaj</h5>
+        <p style="font-size:0.88rem; color:#6677aa;">Hamare samaj ka digital ghar — jahan har lodhi rajpoot ek saath juda hai. Ek community, ek parivaar.</p>
+        <div class="mt-3 d-flex gap-3">
+          <a href="#" style="font-size:1.4rem;color:#8899bb;"><i class="bi bi-facebook"></i></a>
+          <a href="#" style="font-size:1.4rem;color:#8899bb;"><i class="bi bi-whatsapp"></i></a>
+          <a href="#" style="font-size:1.4rem;color:#8899bb;"><i class="bi bi-youtube"></i></a>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <h5>Quick Links</h5>
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('directory') }}">Directory</a>
+        <a href="{{ url_for('events') }}">Events</a>
+        <a href="{{ url_for('achievements') }}">Achievements</a>
+        <a href="{{ url_for('gallery') }}">Gallery</a>
+      </div>
+      <div class="col-md-2">
+        <h5>Services</h5>
+        <a href="{{ url_for('matrimonial') }}">Matrimonial</a>
+        <a href="{{ url_for('blood_donors') }}">Blood Donors</a>
+        <a href="{{ url_for('contact') }}">Contact Us</a>
+        <a href="{{ url_for('register') }}">Join Samaj</a>
+      </div>
+      <div class="col-md-4">
+        <h5>Contact</h5>
+        <p style="font-size:0.88rem;"><i class="bi bi-geo-alt me-2" style="color:var(--gold)"></i>123, Samaj Bhawan, Lucknow, UP - 226001</p>
+        <p style="font-size:0.88rem;"><i class="bi bi-telephone me-2" style="color:var(--gold)"></i>+91 98765 43210</p>
+        <p style="font-size:0.88rem;"><i class="bi bi-envelope me-2" style="color:var(--gold)"></i>info@lodhisamaj.in</p>
+        <p style="font-size:0.88rem;"><i class="bi bi-clock me-2" style="color:var(--gold)"></i>Mon–Sat: 10 AM – 6 PM</p>
+      </div>
+    </div>
+    <div class="footer-bottom text-center">
+      <p>&copy; 2026 Lodhi Rajpoot Samaj. All rights reserved. &nbsp;|&nbsp; Designed with <i class="bi bi-heart-fill text-danger"></i> for our community.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  setTimeout(() => {
+    document.querySelectorAll('.flash-container .alert').forEach(a => {
+      let bsAlert = bootstrap.Alert.getOrCreateInstance(a);
+      bsAlert.close();
+    });
+  }, 4000);
+</script>
+{% block scripts %}{% endblock %}
+</body>
+</html>

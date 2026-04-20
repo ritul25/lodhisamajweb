@@ -1,0 +1,60 @@
+{% extends 'admin/base_admin.html' %}
+{% block title %}Blood Donors{% endblock %}
+{% block admin_content %}
+<h2 style="font-family:'Cinzel',serif;color:var(--navy);margin-bottom:24px;"><i class="bi bi-droplet me-2" style="color:#C0392B;"></i>Blood Donors Management</h2>
+<div class="row g-4">
+  <div class="col-lg-4">
+    <div class="card">
+      <div class="card-body p-4">
+        <h5 style="font-family:'Cinzel',serif;color:var(--navy);margin-bottom:20px;">Nayi Donor Entry</h5>
+        <form method="POST">
+          <div class="mb-3">
+            <label class="form-label fw-bold" style="font-size:0.88rem;">Blood Group *</label>
+            <select name="blood_group" class="form-select" required>
+              {% for bg in ['A+','A-','B+','B-','O+','O-','AB+','AB-'] %}
+              <option>{{ bg }}</option>
+              {% endfor %}
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label fw-bold" style="font-size:0.88rem;">City</label>
+            <input type="text" name="city" class="form-control" placeholder="Donor ka sheher">
+          </div>
+          <button type="submit" class="btn btn-sm w-100" style="background:#C0392B;color:white;">Add Donor</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-body p-0">
+        <table class="table align-middle mb-0" style="font-size:0.88rem;">
+          <thead style="background:#C0392B;color:white;">
+            <tr><th style="padding:14px 16px;">Member</th><th>Blood Group</th><th>City</th><th>Available</th></tr>
+          </thead>
+          <tbody>
+            {% for d in donors %}
+            <tr style="border-bottom:1px solid #f0f0f0;">
+              <td style="padding:12px 16px;font-weight:700;color:var(--navy);">
+                {% if d.member %}{{ d.member.user.name }}{% else %}Direct Entry{% endif %}
+              </td>
+              <td><span style="background:#fee2e2;color:#991b1b;padding:3px 12px;border-radius:20px;font-size:0.82rem;font-weight:700;">{{ d.blood_group }}</span></td>
+              <td style="color:#666;">{{ d.city or '—' }}</td>
+              <td>
+                {% if d.available %}
+                <span style="background:#d1fae5;color:#065f46;padding:3px 10px;border-radius:20px;font-size:0.78rem;">Yes</span>
+                {% else %}
+                <span style="background:#f3f4f6;color:#374151;padding:3px 10px;border-radius:20px;font-size:0.78rem;">No</span>
+                {% endif %}
+              </td>
+            </tr>
+            {% else %}
+            <tr><td colspan="4" class="text-center py-5" style="color:#aaa;">Koi donor registered nahi hai.</td></tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

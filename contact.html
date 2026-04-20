@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Contact{% endblock %}
+{% block content %}
+<div class="page-hero">
+  <div class="container">
+    <h1><i class="bi bi-envelope me-2"></i>Sampark <span style="color:var(--gold2);">Karein</span></h1>
+    <p>Koi sawaal ya sujhav? Hum sunne ke liye taiyaar hain.</p>
+  </div>
+</div>
+<div style="padding:50px 0;background:#f8f9fc;">
+  <div class="container">
+    <div class="row g-5">
+      <div class="col-lg-5">
+        <div class="section-title">Hamse <span>Milein</span></div>
+        <div class="section-divider"></div>
+        {% for icon, title, val in [('geo-alt-fill','Pata','123, Samaj Bhawan, Lucknow\nUttar Pradesh - 226001'),('telephone-fill','Phone','+91 98765 43210\n+91 87654 32109'),('envelope-fill','Email','info@lodhisamaj.in\nadmin@lodhisamaj.in'),('clock-fill','Samay','Monday – Saturday\n10:00 AM – 6:00 PM')] %}
+        <div style="display:flex;gap:16px;margin-bottom:24px;align-items:flex-start;">
+          <div style="width:48px;height:48px;background:var(--navy);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <i class="bi bi-{{ icon }}" style="color:var(--gold2);font-size:1.1rem;"></i>
+          </div>
+          <div>
+            <div style="font-weight:700;color:var(--navy);margin-bottom:4px;">{{ title }}</div>
+            <div style="color:#666;font-size:0.9rem;white-space:pre-line;">{{ val }}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="col-lg-7">
+        <div class="card">
+          <div class="card-body p-4 p-md-5">
+            <h4 style="font-family:'Cinzel',serif;color:var(--navy);margin-bottom:24px;">Sandesh Bhejein</h4>
+            <form method="POST">
+              <div class="row g-3">
+                <div class="col-md-6"><label class="form-label fw-bold">Aapka Naam *</label><input type="text" name="name" class="form-control" required></div>
+                <div class="col-md-6"><label class="form-label fw-bold">Mobile Number</label><input type="tel" name="mobile" class="form-control"></div>
+                <div class="col-12"><label class="form-label fw-bold">Email *</label><input type="email" name="email" class="form-control" required></div>
+                <div class="col-12"><label class="form-label fw-bold">Vishay (Subject) *</label><input type="text" name="subject" class="form-control" required></div>
+                <div class="col-12"><label class="form-label fw-bold">Sandesh (Message) *</label><textarea name="message" class="form-control" rows="5" required placeholder="Aapka sandesh..."></textarea></div>
+                <div class="col-12"><button type="submit" class="btn btn-gold btn-lg w-100"><i class="bi bi-send me-2"></i>Sandesh Bhejein</button></div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

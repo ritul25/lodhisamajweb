@@ -1,0 +1,338 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock %}
+{% block content %}
+
+<!-- Hero Banner -->
+<section style="background:linear-gradient(135deg,#06060A 0%,#0F0F18 50%,#13131A 100%);min-height:520px;display:flex;align-items:center;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent,transparent 60px,rgba(212,168,67,0.025) 60px,rgba(212,168,67,0.025) 120px);"></div>
+  <div style="position:absolute;right:-60px;top:-60px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,0.08),transparent 70%);pointer-events:none;"></div>
+  <div style="position:absolute;left:-80px;bottom:-80px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(212,168,67,0.04),transparent 70%);pointer-events:none;"></div>
+  <div class="container position-relative">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-7">
+        <div style="display:inline-block;background:rgba(212,168,67,0.12);border:1px solid rgba(212,168,67,0.35);border-radius:30px;padding:6px 18px;margin-bottom:20px;">
+          <span style="color:#F0C060;font-size:0.82rem;font-weight:600;letter-spacing:1px;">🙏 JAI LODHI RAJPOOT SAMAJ</span>
+        </div>
+        <h1 style="font-family:'Cinzel',serif;font-size:2.8rem;color:#E8E0D0;line-height:1.2;margin-bottom:12px;">
+          Lodhi Rajpoot Samaj<br>
+          <span style="color:#F0C060;">Community Portal</span>
+        </h1>
+        <p style="font-family:'Tiro Devanagari Hindi',serif;font-size:1.3rem;color:#7A7A9A;margin-bottom:8px;">लोधी राजपूत समाज — एकता, सेवा, प्रगति</p>
+        <p style="color:#7A7A9A;font-size:1rem;max-width:500px;line-height:1.7;margin-bottom:32px;">
+          Hamare samaj ka digital ghar. Members ko connect karo, events mein shamil ho, aur community ki tarakki mein yogdan do.
+        </p>
+        <div class="d-flex flex-wrap gap-3">
+          <a href="{{ url_for('register') }}" class="btn btn-gold btn-lg px-4"><i class="bi bi-person-plus me-2"></i>Sadasya Banein</a>
+          <a href="{{ url_for('directory') }}" class="btn btn-outline-light btn-lg px-4"><i class="bi bi-people me-2"></i>Directory Dekhein</a>
+        </div>
+      </div>
+      <div class="col-lg-5 d-none d-lg-block text-center">
+        <div style="background:rgba(212,168,67,0.04);border:1px solid rgba(212,168,67,0.2);border-radius:20px;padding:30px;">
+          <img src="{{ url_for('static', filename='images/logo.png') }}"
+               alt="Lodhi Rajpoot Samaj"
+               style="width:100%;max-width:320px;height:auto;object-fit:contain;filter:drop-shadow(0 4px 24px rgba(212,168,67,0.3));border-radius:12px;">
+          <div style="border-top:1px solid rgba(212,168,67,0.2);margin-top:20px;padding-top:20px;">
+            <div class="row text-center g-3">
+              <div class="col-4">
+                <div style="font-size:1.8rem;font-weight:700;color:#F0C060;">{{ member_count }}+</div>
+                <div style="font-size:0.75rem;color:#7A7A9A;">Members</div>
+              </div>
+              <div class="col-4">
+                <div style="font-size:1.8rem;font-weight:700;color:#F0C060;">{{ event_count }}+</div>
+                <div style="font-size:0.75rem;color:#7A7A9A;">Events</div>
+              </div>
+              <div class="col-4">
+                <div style="font-size:1.8rem;font-weight:700;color:#F0C060;">10+</div>
+                <div style="font-size:0.75rem;color:#7A7A9A;">Zile</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<section style="background:#0D0D14;padding:28px 0;border-top:1px solid rgba(212,168,67,0.12);border-bottom:1px solid rgba(212,168,67,0.12);">
+  <div class="container">
+    <div class="row g-3 text-center">
+      {% for icon, num, label, color in [('people-fill', member_count, 'Registered Members', '#D4A843'), ('calendar-check', event_count, 'Samaj Events', '#D4A843'), ('droplet-fill', '50+', 'Blood Donors', '#E05555'), ('trophy-fill', '20+', 'Achievements', '#44BB77')] %}
+      <div class="col-6 col-md-3">
+        <div class="stat-box" style="border-top-color:{{ color }}">
+          <i class="bi bi-{{ icon }}" style="font-size:1.8rem;color:{{ color }};"></i>
+          <div class="number mt-1" style="color:{{ color }}">{{ num }}</div>
+          <div class="label">{{ label }}</div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Samaj Ke Mahanayak Section -->
+<section style="padding:70px 0;background:linear-gradient(180deg,#08080F 0%,#0D0D16 100%);position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(212,168,67,0.06),transparent 60%);pointer-events:none;"></div>
+  <div class="container position-relative">
+    <div class="text-center mb-5">
+      <div style="display:inline-block;background:rgba(212,168,67,0.1);border:1px solid rgba(212,168,67,0.3);border-radius:30px;padding:6px 20px;margin-bottom:16px;">
+        <span style="color:#D4A843;font-size:0.8rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;">🏆 Hamare Aadarsh</span>
+      </div>
+      <div class="section-title text-center">Samaj Ke <span>Mahanayak</span></div>
+      <div style="width:80px;height:3px;background:linear-gradient(90deg,transparent,#D4A843,transparent);margin:10px auto 16px;"></div>
+      <p style="color:#7A7A9A;max-width:550px;margin:0 auto;">Yeh wo mahaan vibhutiyan hain jinse hamare Lodhi Rajpoot samaj ko garv hai — jinke adarshon par chalkar hum aage badhte hain.</p>
+    </div>
+
+    <div class="row g-4 justify-content-center">
+
+      <!-- Rani Avanti Bai Lodhi -->
+      <div class="col-md-4">
+        <div style="background:#13131A;border:1px solid rgba(212,168,67,0.2);border-radius:20px;overflow:hidden;transition:all 0.3s;text-align:center;"
+             onmouseover="this.style.borderColor='rgba(212,168,67,0.5)';this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 50px rgba(0,0,0,0.5)';"
+             onmouseout="this.style.borderColor='rgba(212,168,67,0.2)';this.style.transform='none';this.style.boxShadow='none';">
+          <div style="position:relative;overflow:hidden;">
+            <div style="background:linear-gradient(135deg,#1A0A00,#2A1500);height:6px;"></div>
+            <!-- Photo — replace karo: static/images/rani_avanti.jpg -->
+            <div style="width:140px;height:140px;border-radius:50%;margin:24px auto 0;background:linear-gradient(135deg,#2A1500,#3D2200);border:3px solid rgba(212,168,67,0.4);display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative;">
+              <img src="{{ url_for('static', filename='images/rani_avanti.jpg') }}"
+                   alt="Rani Avanti Bai Lodhi"
+                   style="width:100%;height:100%;object-fit:cover;"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+              <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;flex-direction:column;">
+                <i class="bi bi-person-fill" style="font-size:3.5rem;color:#D4A843;opacity:0.6;"></i>
+              </div>
+            </div>
+            <div style="position:absolute;top:12px;right:12px;background:rgba(212,168,67,0.15);border:1px solid rgba(212,168,67,0.3);border-radius:20px;padding:3px 10px;font-size:0.7rem;color:#D4A843;font-weight:700;">1831–1858</div>
+          </div>
+          <div style="padding:20px 24px 28px;">
+            <h4 style="font-family:'Cinzel',serif;color:#F0C060;font-size:1.15rem;margin-bottom:4px;">Rani Avanti Bai Lodhi</h4>
+            <div style="color:#8A6820;font-size:0.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;">Veergati Ko Prapt Veerangana</div>
+            <p style="color:#9A9280;font-size:0.88rem;line-height:1.7;">1857 ki Kranti ki mahan veerangana — Ramgarh ki Rani jo British satta ke khilaf ladne wali Lodhi Rajpoot samaj ki gaurav hain.</p>
+            <div style="margin-top:16px;display:flex;justify-content:center;gap:8px;">
+              <span style="background:rgba(212,168,67,0.1);border:1px solid rgba(212,168,67,0.2);color:#D4A843;padding:4px 12px;border-radius:20px;font-size:0.75rem;">🗡️ Swatantrata Senani</span>
+              <span style="background:rgba(212,168,67,0.1);border:1px solid rgba(212,168,67,0.2);color:#D4A843;padding:4px 12px;border-radius:20px;font-size:0.75rem;">👑 Rani</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Swami Brahmanand Lodhi -->
+      <div class="col-md-4">
+        <div style="background:#13131A;border:1px solid rgba(212,168,67,0.2);border-radius:20px;overflow:hidden;transition:all 0.3s;text-align:center;"
+             onmouseover="this.style.borderColor='rgba(212,168,67,0.5)';this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 50px rgba(0,0,0,0.5)';"
+             onmouseout="this.style.borderColor='rgba(212,168,67,0.2)';this.style.transform='none';this.style.boxShadow='none';">
+          <div style="background:linear-gradient(135deg,#0A1A00,#152500);height:6px;"></div>
+          <div style="width:140px;height:140px;border-radius:50%;margin:24px auto 0;background:linear-gradient(135deg,#0A1A00,#152800);border:3px solid rgba(100,180,80,0.4);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+            <img src="{{ url_for('static', filename='images/swami_brahmanand.jpg') }}"
+                 alt="Swami Brahmanand Lodhi"
+                 style="width:100%;height:100%;object-fit:cover;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;">
+              <i class="bi bi-person-fill" style="font-size:3.5rem;color:#64B450;opacity:0.6;"></i>
+            </div>
+          </div>
+          <div style="padding:20px 24px 28px;">
+            <h4 style="font-family:'Cinzel',serif;color:#A0D880;font-size:1.15rem;margin-bottom:4px;">Swami Brahmanand Lodhi</h4>
+            <div style="color:#4A7830;font-size:0.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;">Sant Evam Samaj Sudhaarak</div>
+            <p style="color:#9A9280;font-size:0.88rem;line-height:1.7;">Lodhi Rajpoot samaj ke mahaan sant evam samaj sudhaarak jinhone apna poora jeevan samaj ki unnati aur jan jaagran ke liye samarpit kiya.</p>
+            <div style="margin-top:16px;display:flex;justify-content:center;gap:8px;">
+              <span style="background:rgba(100,180,80,0.1);border:1px solid rgba(100,180,80,0.2);color:#64B450;padding:4px 12px;border-radius:20px;font-size:0.75rem;">🕉️ Sant</span>
+              <span style="background:rgba(100,180,80,0.1);border:1px solid rgba(100,180,80,0.2);color:#64B450;padding:4px 12px;border-radius:20px;font-size:0.75rem;">📚 Samaj Sevak</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Babu Kalyan Singh Lodhi -->
+      <div class="col-md-4">
+        <div style="background:#13131A;border:1px solid rgba(212,168,67,0.2);border-radius:20px;overflow:hidden;transition:all 0.3s;text-align:center;"
+             onmouseover="this.style.borderColor='rgba(212,168,67,0.5)';this.style.transform='translateY(-6px)';this.style.boxShadow='0 20px 50px rgba(0,0,0,0.5)';"
+             onmouseout="this.style.borderColor='rgba(212,168,67,0.2)';this.style.transform='none';this.style.boxShadow='none';">
+          <div style="background:linear-gradient(135deg,#0A0A20,#151530);height:6px;"></div>
+          <div style="width:140px;height:140px;border-radius:50%;margin:24px auto 0;background:linear-gradient(135deg,#0A0A20,#151535);border:3px solid rgba(100,120,220,0.4);display:flex;align-items:center;justify-content:center;overflow:hidden;">
+            <img src="{{ url_for('static', filename='images/kalyan_singh.jpg') }}"
+                 alt="Babu Kalyan Singh Lodhi"
+                 style="width:100%;height:100%;object-fit:cover;"
+                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div style="display:none;width:100%;height:100%;align-items:center;justify-content:center;">
+              <i class="bi bi-person-fill" style="font-size:3.5rem;color:#6478DC;opacity:0.6;"></i>
+            </div>
+          </div>
+          <div style="padding:20px 24px 28px;">
+            <h4 style="font-family:'Cinzel',serif;color:#8090E0;font-size:1.15rem;margin-bottom:4px;">Babu Kalyan Singh Lodhi</h4>
+            <div style="color:#3A4880;font-size:0.78rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;">Rajneta Evam Samaj Neta</div>
+            <p style="color:#9A9280;font-size:0.88rem;line-height:1.7;">Uttar Pradesh ke mahaan rajneta aur Lodhi Rajpoot samaj ke sachche pratinidhi jinhone rajneeti mein samaj ka maan badhaya.</p>
+            <div style="margin-top:16px;display:flex;justify-content:center;gap:8px;">
+              <span style="background:rgba(100,120,220,0.1);border:1px solid rgba(100,120,220,0.2);color:#6478DC;padding:4px 12px;border-radius:20px;font-size:0.75rem;">🏛️ Rajneta</span>
+              <span style="background:rgba(100,120,220,0.1);border:1px solid rgba(100,120,220,0.2);color:#6478DC;padding:4px 12px;border-radius:20px;font-size:0.75rem;">🌟 Neta Ji</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Photo replace instruction -->
+    <div style="text-align:center;margin-top:32px;">
+      <div style="display:inline-block;background:#0D0D14;border:1px dashed rgba(212,168,67,0.25);border-radius:10px;padding:10px 20px;font-size:0.8rem;color:#7A7A9A;">
+        <i class="bi bi-info-circle me-2" style="color:#D4A843;"></i>
+        Photos replace karne ke liye: <code style="color:#D4A843;">static/images/</code> folder mein
+        <code style="color:#D4A843;">rani_avanti.jpg</code>,
+        <code style="color:#D4A843;">swami_brahmanand.jpg</code>,
+        <code style="color:#D4A843;">kalyan_singh.jpg</code> naam se save karein.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section style="padding:70px 0;background:#0A0A0F;">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <div class="section-title">Hamare <span>Samaj</span> Ke Baare Mein</div>
+        <div class="section-divider"></div>
+        <p style="color:#B0A890;line-height:1.8;margin-bottom:16px;">Lodhi Rajpoot Samaj ek gauravshali aur samridhha community hai jo poorey Uttar Pradesh aur India mein faili hui hai. Hamara samaj ek sath milkar chalata hai — ekta, seva aur pragati ke teen stambhon par.</p>
+        <p style="color:#B0A890;line-height:1.8;margin-bottom:24px;">Yeh digital platform hamare samaj ke har member ko ek doosre se jodne ke liye banaya gaya hai — chahe woh kisi bhi sheher ya pradesh mein ho.</p>
+        <div class="row g-3">
+          {% for icon, title, desc in [('shield-check','Vishwas','Har member verified hai'),('heart','Seva','Saath mein chalein aage'),('star','Pragati','Samaj ki unnati hamare haath')] %}
+          <div class="col-md-4">
+            <div style="text-align:center;padding:20px 10px;background:#13131A;border:1px solid rgba(212,168,67,0.15);border-radius:12px;">
+              <i class="bi bi-{{ icon }}" style="font-size:1.8rem;color:#D4A843;"></i>
+              <div style="font-weight:700;color:#E8E0D0;margin-top:8px;font-size:0.9rem;">{{ title }}</div>
+              <div style="font-size:0.78rem;color:#7A7A9A;margin-top:4px;">{{ desc }}</div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div style="background:#13131A;border:1px solid rgba(212,168,67,0.2);border-radius:20px;padding:32px;">
+          <h4 style="font-family:'Cinzel',serif;color:#F0C060;margin-bottom:20px;"><i class="bi bi-megaphone me-2"></i>Adhyaksh Ka Sandesh</h4>
+          <p style="line-height:1.8;color:#B0A890;font-style:italic;">"Lodhi Rajpoot Samaj ka yeh digital manch hamare samaj ke har sadasya ko ek doosre se jodta hai. Hum milkar apni sanskriti, parampara aur gaurav ko aage le ja sakte hain."</p>
+          <div style="margin-top:20px;border-top:1px solid rgba(212,168,67,0.15);padding-top:16px;">
+            <div style="font-weight:700;color:#F0C060;">— Samaj Adhyaksh</div>
+            <div style="font-size:0.82rem;color:#7A7A9A;">Lodhi Rajpoot Samaj, Uttar Pradesh</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Latest Events -->
+<section style="padding:70px 0;background:#0D0D14;">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+      <div>
+        <div class="section-title">Upcoming <span>Events</span></div>
+        <div class="section-divider"></div>
+      </div>
+      <a href="{{ url_for('events') }}" class="btn btn-outline-gold btn-sm">Sabhi Dekhein <i class="bi bi-arrow-right ms-1"></i></a>
+    </div>
+    <div class="row g-4">
+      {% if events %}
+        {% for event in events %}
+        <div class="col-md-4">
+          <div class="card h-100">
+            <div style="background:linear-gradient(90deg,#D4A843,#F0C060);height:3px;border-radius:14px 14px 0 0;"></div>
+            <div class="card-body p-4">
+              <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px;">
+                <div style="background:#1A1A25;border:1px solid rgba(212,168,67,0.2);border-radius:8px;padding:10px 14px;text-align:center;min-width:52px;flex-shrink:0;">
+                  <div style="font-weight:700;color:#F0C060;font-size:1.1rem;line-height:1;">{{ event.event_date.split()[0] if event.event_date else '?' }}</div>
+                  <div style="font-size:0.7rem;color:#7A7A9A;">{{ event.event_date.split()[1] if event.event_date and event.event_date.split()|length > 1 else '' }}</div>
+                </div>
+                <h5 style="font-family:'Cinzel',serif;color:#E8E0D0;font-size:1rem;margin:0;">{{ event.title }}</h5>
+              </div>
+              {% if event.venue %}
+              <p style="font-size:0.85rem;color:#7A7A9A;margin-bottom:8px;"><i class="bi bi-geo-alt me-1" style="color:#D4A843;"></i>{{ event.venue }}</p>
+              {% endif %}
+              <p style="font-size:0.9rem;color:#B0A890;line-height:1.6;">{{ (event.description or '')[:100] }}{% if event.description and event.description|length > 100 %}...{% endif %}</p>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      {% else %}
+        <div class="col-12 text-center py-5">
+          <i class="bi bi-calendar-x" style="font-size:3rem;color:#333;"></i>
+          <p class="mt-3" style="color:#7A7A9A;">Abhi koi event nahi hai.</p>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<!-- Quick Links / Services -->
+<section style="background:#06060A;padding:70px 0;border-top:1px solid rgba(212,168,67,0.1);">
+  <div class="container">
+    <div class="text-center mb-5">
+      <h2 style="font-family:'Cinzel',serif;color:#F0C060;">Hamaari Sevaayein</h2>
+      <p style="color:#7A7A9A;">Community ke liye upyogi suvidhayein</p>
+    </div>
+    <div class="row g-4">
+      {% for icon, title, desc, link, link_text in [
+        ('people','Member Directory','Samaj ke sabhi sadasyaon ki list khojein',url_for('directory'),'Directory Dekhein'),
+        ('heart','Matrimonial','Yogya var-vadhu ki jaankari paayein',url_for('matrimonial'),'Profiles Dekhein'),
+        ('droplet','Blood Donors','Emergency mein blood donor khojein',url_for('blood_donors'),'Donors Khojein'),
+        ('images','Gallery','Samaj ke karyakramon ki yaadon mein',url_for('gallery'),'Gallery Dekhein'),
+        ('trophy','Achievements','Hamare gauravshali sadasyaon ke kaarname',url_for('achievements'),'Dekhein'),
+        ('envelope','Contact Us','Koi sawaal? Hamse sampark karein',url_for('contact'),'Contact Karein'),
+      ] %}
+      <div class="col-md-4 col-sm-6">
+        <div style="background:#13131A;border:1px solid rgba(212,168,67,0.15);border-radius:14px;padding:28px 24px;height:100%;transition:all 0.25s;cursor:pointer;"
+             onmouseover="this.style.background='#1A1A25';this.style.borderColor='rgba(212,168,67,0.4)';this.style.transform='translateY(-3px)';"
+             onmouseout="this.style.background='#13131A';this.style.borderColor='rgba(212,168,67,0.15)';this.style.transform='none';">
+          <i class="bi bi-{{ icon }}" style="font-size:2rem;color:#D4A843;"></i>
+          <h5 style="color:#E8E0D0;margin-top:14px;font-weight:700;">{{ title }}</h5>
+          <p style="color:#7A7A9A;font-size:0.88rem;margin:8px 0 16px;">{{ desc }}</p>
+          <a href="{{ link }}" style="color:#F0C060;font-size:0.85rem;font-weight:600;text-decoration:none;">{{ link_text }} <i class="bi bi-arrow-right ms-1"></i></a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- Achievements -->
+{% if achievements %}
+<section style="padding:70px 0;background:#0A0A0F;">
+  <div class="container">
+    <div class="d-flex justify-content-between align-items-end mb-4">
+      <div>
+        <div class="section-title">Hamare <span>Gaurav</span></div>
+        <div class="section-divider"></div>
+      </div>
+      <a href="{{ url_for('achievements') }}" class="btn btn-outline-gold btn-sm">Sabhi Dekhein <i class="bi bi-arrow-right ms-1"></i></a>
+    </div>
+    <div class="row g-4">
+      {% for ach in achievements %}
+      <div class="col-md-4">
+        <div class="card h-100">
+          <div class="card-body p-4">
+            <div style="display:inline-block;background:#1A1A25;color:#D4A843;font-size:0.75rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:12px;text-transform:uppercase;border:1px solid rgba(212,168,67,0.2);">{{ ach.category or 'Achievement' }}</div>
+            <h5 style="font-weight:700;color:#E8E0D0;">{{ ach.title }}</h5>
+            <p style="color:#B0A890;font-size:0.9rem;line-height:1.6;">{{ (ach.description or '')[:100] }}...</p>
+            <div style="color:#7A7A9A;font-size:0.82rem;margin-top:12px;"><i class="bi bi-calendar3 me-1"></i>{{ ach.year }}</div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- CTA -->
+<section style="background:linear-gradient(135deg,#1A1200 0%,#2A1E00 50%,#1A1200 100%);padding:70px 0;text-align:center;border-top:1px solid rgba(212,168,67,0.2);border-bottom:1px solid rgba(212,168,67,0.2);position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(212,168,67,0.08),transparent 70%);pointer-events:none;"></div>
+  <div class="container position-relative">
+    <div style="font-size:2.5rem;margin-bottom:8px;">🦁</div>
+    <h2 style="font-family:'Cinzel',serif;color:#F0C060;font-size:2rem;margin-bottom:12px;">Aaj Hi Sadasya Banein!</h2>
+    <p style="color:#B0A890;max-width:500px;margin:0 auto 28px;font-size:1.05rem;">Hamare samaj ka hissa banein aur hazaron Lodhi Rajpoot parivaron se jud jaayein.</p>
+    <a href="{{ url_for('register') }}" class="btn btn-gold btn-lg px-5">
+      <i class="bi bi-person-plus me-2"></i>Free Registration
+    </a>
+  </div>
+</section>
+
+{% endblock %}
